@@ -1,0 +1,30 @@
+# .NET build output
+[Bb]in/
+[Oo]bj/
+artifacts/
+TestResults/
+*.user
+*.suo
+
+# IDE/editor files
+.vs/
+.vscode/
+.idea/
+*.DotSettings.user
+
+# Local configuration and secrets
+appsettings.Local.json
+appsettings.*.Local.json
+.env
+.env.*
+!.env.example
+*.secret.json
+
+# AWS CDK generated output
+cdk.out/
+.cdk.staging/
+
+# OS files
+.DS_Store
+Thumbs.db
+

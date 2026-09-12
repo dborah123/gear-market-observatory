@@ -1,0 +1,7 @@
+{
+  "app": "dotnet run --project CdkApp.csproj --no-restore",
+  "context": {
+    "environment": "dev",
+    "awsRegion": "us-east-1"
+  }
+}

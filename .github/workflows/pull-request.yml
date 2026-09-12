@@ -1,0 +1,40 @@
+name: Pull request validation
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-test-synth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install AWS CDK CLI
+        run: npm install --global aws-cdk
+
+      - name: Restore
+        run: dotnet restore GearMarketObservatory.sln
+
+      - name: Build
+        run: dotnet build GearMarketObservatory.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test GearMarketObservatory.sln --no-build --configuration Release
+
+      - name: Synthesize CDK
+        working-directory: infrastructure/cdk
+        run: cdk synth --lookups false
